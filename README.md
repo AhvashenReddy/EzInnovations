@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ez Innovations Website
+
+A modern, responsive Next.js website for Ez Innovations - a South African software development company.
+
+## Features
+
+- **Modern Design**: Clean, professional design with gradient accents and smooth animations
+- **Fully Responsive**: Optimized for all devices from mobile to desktop
+- **Interactive Animations**: Smooth scroll animations and hover effects using Framer Motion
+- **SEO Optimized**: Proper meta tags and semantic HTML structure
+- **Performance Optimized**: Fast loading with Next.js optimizations
+- **Accessibility**: WCAG compliant design with proper contrast and keyboard navigation
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Fonts**: Inter (Google Fonts)
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── globals.css          # Global styles and Tailwind configuration
+│   ├── layout.tsx           # Root layout with metadata
+│   └── page.tsx             # Main page component
+└── components/
+    ├── Navigation.tsx       # Responsive navigation bar
+    ├── Hero.tsx             # Hero section with animations
+    ├── About.tsx            # About section with stats
+    ├── Services.tsx         # Services grid with technology stack
+    ├── Process.tsx          # Process steps with timeline
+    ├── Contact.tsx          # Contact form and information
+    └── Footer.tsx           # Footer with links and company info
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Improvements Over Original
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Modern UI/UX**: 
+   - Clean, minimalist design
+   - Better typography and spacing
+   - Consistent color scheme with gradients
+   - Card-based layout for better content organization
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Enhanced Interactivity**:
+   - Smooth scroll animations
+   - Hover effects and transitions
+   - Interactive contact form
+   - Mobile-friendly navigation
 
-## Learn More
+3. **Better Performance**:
+   - Next.js optimizations
+   - Optimized images and fonts
+   - Lazy loading and code splitting
+   - SEO-friendly structure
 
-To learn more about Next.js, take a look at the following resources:
+4. **Responsive Design**:
+   - Mobile-first approach
+   - Flexible grid layouts
+   - Touch-friendly interactions
+   - Optimized for all screen sizes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Accessibility**:
+   - Semantic HTML structure
+   - Proper ARIA labels
+   - Keyboard navigation support
+   - High contrast ratios
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+The site is ready for deployment on platforms like Vercel, Netlify, or any hosting service that supports Next.js.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+© 2024 Ez Innovations (Pty) Ltd. All Rights Reserved
