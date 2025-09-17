@@ -10,8 +10,6 @@ import {
   Globe, 
   Headphones, 
   Database,
-  Cloud,
-  Shield
 } from 'lucide-react'
 
 const Services = () => {

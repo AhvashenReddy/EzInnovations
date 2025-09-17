@@ -102,7 +102,7 @@ const About = () => {
           >
             <div className="card-modern p-8 lg:p-10 bg-gradient-to-br from-teal-50 to-cyan-50 border-l-4 border-teal-500">
               <blockquote className="text-2xl lg:text-3xl font-medium text-gray-900 mb-6 leading-relaxed italic">
-                "Any sufficiently advanced technology is equivalent to magic"
+                &ldquo;Any sufficiently advanced technology is equivalent to magic&rdquo;
               </blockquote>
               <cite className="text-lg text-teal-700 font-semibold">- Sir Arthur C. Clarke</cite>
             </div>
