@@ -24,10 +24,6 @@ const ClientsCarousel = () => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    // Only enable auto-scroll on desktop, disable on mobile
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) return;
-
     const scrollStep = 0.5;
     const interval = setInterval(() => {
       if (isHovered) return; // Pause on hover
@@ -76,27 +72,35 @@ const ClientsCarousel = () => {
         >
           <div 
             ref={carouselRef} 
-            className="flex gap-6 sm:gap-8 lg:gap-12 overflow-x-auto py-4 sm:py-6 no-scrollbar"
+            className="flex gap-4 sm:gap-6 lg:gap-8 overflow-x-auto py-4 sm:py-6 no-scrollbar"
             style={{ 
-              scrollBehavior: 'auto',
+              scrollBehavior: 'smooth',
               WebkitOverflowScrolling: 'touch',
               overflowX: 'scroll',
               minWidth: '100%',
               touchAction: 'pan-x',
               overscrollBehaviorX: 'contain'
             }}
+            onTouchStart={(e) => {
+              // Ensure touch scrolling works on mobile
+              e.currentTarget.style.scrollBehavior = 'auto';
+            }}
+            onTouchEnd={(e) => {
+              // Re-enable smooth scrolling after touch
+              e.currentTarget.style.scrollBehavior = 'smooth';
+            }}
           >
             {duplicatedClients.map((client, index) => (
               <div 
                 key={`${client.name}-${index}`} 
-                className="flex-shrink-0 flex items-center justify-center h-16 w-40 sm:h-20 sm:w-48 lg:h-20 lg:w-48 opacity-60 hover:opacity-100 transition-opacity duration-300"
+                className="flex-shrink-0 flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 lg:h-16 lg:w-32 opacity-60 hover:opacity-100 transition-opacity duration-300"
               >
-                <Image 
-                  src={client.logo} 
-                  alt={`${client.name} logo`} 
-                  width={120} 
-                  height={60} 
-                  className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300" 
+                <Image
+                  src={client.logo}
+                  alt={`${client.name} logo`}
+                  width={80}
+                  height={40}
+                  className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
                 />
               </div>
             ))}
