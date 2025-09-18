@@ -43,7 +43,7 @@ const ClientsCarousel = () => {
 
   return (
     <section className="py-3 sm:py-6 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div className="w-full px-2 sm:px-6 lg:px-8">
         <div className="text-center mb-3 sm:mb-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -71,19 +71,21 @@ const ClientsCarousel = () => {
             className="flex gap-6 sm:gap-8 lg:gap-12 overflow-x-auto py-4 sm:py-6 no-scrollbar"
             style={{ 
               scrollBehavior: 'smooth',
-              WebkitOverflowScrolling: 'touch'
+              WebkitOverflowScrolling: 'touch',
+              overflowX: 'scroll',
+              minWidth: '100%'
             }}
           >
             {duplicatedClients.map((client, index) => (
               <div 
                 key={`${client.name}-${index}`} 
-                className="flex-shrink-0 flex items-center justify-center h-16 w-32 sm:h-20 sm:w-40 lg:h-20 lg:w-40 opacity-60 hover:opacity-100 transition-opacity duration-300"
+                className="flex-shrink-0 flex items-center justify-center h-16 w-40 sm:h-20 sm:w-48 lg:h-20 lg:w-48 opacity-60 hover:opacity-100 transition-opacity duration-300"
               >
                 <Image 
                   src={client.logo} 
                   alt={`${client.name} logo`} 
-                  width={100} 
-                  height={50} 
+                  width={120} 
+                  height={60} 
                   className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300" 
                 />
               </div>
