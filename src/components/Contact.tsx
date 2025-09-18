@@ -69,7 +69,7 @@ const Contact = () => {
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
             Ready to transform your business with innovative software solutions? 
-            Let's discuss your project and bring your ideas to life.
+            Let&apos;s discuss your project and bring your ideas to life.
           </p>
         </motion.div>
 
