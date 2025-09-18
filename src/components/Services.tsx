@@ -10,6 +10,8 @@ import {
   Globe, 
   Headphones, 
   Database,
+  Cloud,
+  Shield
 } from 'lucide-react'
 
 const Services = () => {
@@ -67,24 +69,23 @@ const Services = () => {
   ]
 
   return (
-    <section id="services" className="py-16 sm:py-20 gradient-bg" aria-labelledby="services-heading">
+    <section id="services" className="py-16 sm:py-20 gradient-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.header
+        <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 id="services-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-            Our Software Development <span className="gradient-text">Services</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+            Our <span className="gradient-text">Services</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-            Professional software development services including custom software solutions, 
-            mobile app development, web development, and digital transformation services 
-            for businesses across South Africa.
+            We provide comprehensive software solutions that empower your business 
+            to stay ahead in the fast-paced digital world.
           </p>
-        </motion.header>
+        </motion.div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">

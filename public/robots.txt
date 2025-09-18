@@ -21,3 +21,4 @@ Allow: /*.gif
 Allow: /*.svg
 Allow: /*.ico
 Allow: /*.pdf
+

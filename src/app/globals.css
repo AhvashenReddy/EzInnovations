@@ -56,10 +56,23 @@
   .card-modern {
     @apply bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden;
   }
+  
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
 }
 
 @layer utilities {
   .text-shadow {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

@@ -71,43 +71,43 @@ const Process = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
-          <h2 className="heading-secondary mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight mb-4 sm:mb-6">
             Our <span className="gradient-text">Process</span>
           </h2>
-          <p className="text-large text-gray-600 max-w-4xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
             We follow a proven methodology to ensure your project is delivered 
             on time, within budget, and exceeds expectations.
           </p>
         </motion.div>
 
         {/* Process Steps - Redesigned */}
-        <div className="space-y-8 lg:space-y-12 mb-16 lg:mb-20">
+        <div className="space-y-6 sm:space-y-8 lg:space-y-12 mb-12 sm:mb-16 lg:mb-20">
           {processSteps.map((step, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`grid lg:grid-cols-12 gap-8 items-center ${
+              className={`grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ${
                 index % 2 === 0 ? '' : 'lg:text-right'
               }`}
             >
               {/* Step Content */}
               <div className={`lg:col-span-5 ${index % 2 === 0 ? '' : 'lg:order-2'}`}>
-                <div className="flex items-center gap-4 mb-4 justify-center lg:justify-start">
-                  <div className="w-12 h-12 bg-gradient-to-r from-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
-                    <step.icon className="w-6 h-6 text-white" />
+                <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 justify-center lg:justify-start">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <step.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  <div className="w-10 h-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-lg shadow-md">
                     {step.step}
                   </div>
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 text-center lg:text-left">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 sm:mb-4 text-center lg:text-left">
                   {step.title}
                 </h3>
-                <p className="text-lg text-gray-600 leading-relaxed text-center lg:text-left">
+                <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed text-center lg:text-left">
                   {step.description}
                 </p>
               </div>
