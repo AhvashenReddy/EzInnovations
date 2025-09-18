@@ -9,9 +9,7 @@ import {
   Package, 
   Globe, 
   Headphones, 
-  Database,
-  Cloud,
-  Shield
+  Database
 } from 'lucide-react'
 
 const Services = () => {

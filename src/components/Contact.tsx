@@ -80,11 +80,11 @@ const Contact = () => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">Let's Start a Conversation</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 sm:mb-8">Let&apos;s Start a Conversation</h3>
             <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
-              We're here to help you navigate the digital transformation journey. 
+              We&apos;re here to help you navigate the digital transformation journey. 
               Whether you have a specific project in mind or just want to explore 
-              possibilities, we'd love to hear from you.
+              possibilities, we&apos;d love to hear from you.
             </p>
 
             <div className="space-y-3 sm:space-y-4">
@@ -116,7 +116,7 @@ const Contact = () => {
             >
               <h4 className="text-base sm:text-lg font-bold text-gray-800 mb-2">Proudly South African</h4>
               <p className="text-sm sm:text-base text-gray-600">
-                We're a local company with global expertise, understanding both 
+                We&apos;re a local company with global expertise, understanding both 
                 international best practices and local business needs.
               </p>
             </motion.div>
@@ -139,7 +139,7 @@ const Contact = () => {
               >
                 <CheckCircle className="w-12 h-12 sm:w-16 sm:h-16 text-teal-500 mx-auto mb-3 sm:mb-4" />
                 <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">Message Sent!</h4>
-                <p className="text-sm sm:text-base text-gray-600">We'll get back to you within 24 hours.</p>
+                <p className="text-sm sm:text-base text-gray-600">We&apos;ll get back to you within 24 hours.</p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
