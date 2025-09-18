@@ -11,7 +11,7 @@ const clients = [
   { name: 'Duplex', logo: '/clients/duplex.png' },
   { name: 'Everwey Projects', logo: '/clients/EverweyProjects.png' },
   { name: 'Growthpoint', logo: '/clients/growthpoint.png' },
-  { name: 'Hello Yes', logo: '/clients/Helloyes.png' },
+  { name: 'Hello Yes', logo: '/clients/Helloyes.svg' },
   { name: 'Izisombululo', logo: '/clients/Izisombululo.png' },
   { name: 'Neo Next', logo: '/clients/NeoNext.png' },
 ];
@@ -70,16 +70,14 @@ const ClientsCarousel = () => {
             ref={carouselRef} 
             className="flex gap-6 sm:gap-8 lg:gap-12 overflow-x-auto py-4 sm:py-6 no-scrollbar"
             style={{ 
-              scrollBehavior: 'auto',
-              WebkitOverflowScrolling: 'touch',
-              scrollSnapType: 'x mandatory'
+              scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch'
             }}
           >
             {duplicatedClients.map((client, index) => (
               <div 
                 key={`${client.name}-${index}`} 
                 className="flex-shrink-0 flex items-center justify-center h-16 w-32 sm:h-20 sm:w-40 lg:h-20 lg:w-40 opacity-60 hover:opacity-100 transition-opacity duration-300"
-                style={{ scrollSnapAlign: 'start' }}
               >
                 <Image 
                   src={client.logo} 
