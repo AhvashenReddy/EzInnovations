@@ -19,17 +19,13 @@ const clients = [
 const ClientsCarousel = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [isManuallyScrolling, setIsManuallyScrolling] = useState(false);
 
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    // Check if it's mobile
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    
-    // Only auto-scroll on desktop
-    if (isMobile) return;
+    // Only auto-scroll on desktop (screen width > 768px)
+    if (window.innerWidth <= 768) return;
 
     const scrollStep = 0.5;
     const interval = setInterval(() => {
@@ -65,7 +61,7 @@ const ClientsCarousel = () => {
         </div>
         
         <motion.div 
-          className="relative overflow-hidden"
+          className="relative"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -75,41 +71,28 @@ const ClientsCarousel = () => {
         >
           <div 
             ref={carouselRef} 
-            className="py-4 sm:py-6 hide-scrollbar"
+            className="flex gap-4 sm:gap-6 lg:gap-8 py-4 sm:py-6 overflow-x-auto hide-scrollbar"
             style={{ 
-              overflowX: 'auto',
-              overflowY: 'hidden',
               WebkitOverflowScrolling: 'touch',
-              touchAction: 'pan-x'
+              touchAction: 'pan-x',
+              minWidth: '200vw'
             }}
           >
-            <div 
-              className="flex gap-4 sm:gap-6 lg:gap-8"
-              style={{ 
-                width: 'max-content',
-                minWidth: '100%'
-              }}
-            >
-              {duplicatedClients.map((client, index) => (
-                <div 
-                  key={`${client.name}-${index}`} 
-                  className="flex-shrink-0 flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 lg:h-16 lg:w-32 opacity-60 hover:opacity-100 transition-opacity duration-300"
-                >
-                  <Image
-                    src={client.logo}
-                    alt={`${client.name} logo`}
-                    width={80}
-                    height={40}
-                    className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-              ))}
-            </div>
+            {duplicatedClients.map((client, index) => (
+              <div 
+                key={`${client.name}-${index}`} 
+                className="flex-shrink-0 flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 lg:h-16 lg:w-32 opacity-60 hover:opacity-100 transition-opacity duration-300"
+              >
+                <Image
+                  src={client.logo}
+                  alt={`${client.name} logo`}
+                  width={80}
+                  height={40}
+                  className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
+            ))}
           </div>
-          
-          {/* Gradient overlays for smooth fade effect */}
-          <div className="absolute top-0 left-0 w-8 sm:w-12 lg:w-16 h-full bg-gradient-to-r from-gray-50 to-transparent pointer-events-none"></div>
-          <div className="absolute top-0 right-0 w-8 sm:w-12 lg:w-16 h-full bg-gradient-to-l from-gray-50 to-transparent pointer-events-none"></div>
         </motion.div>
       </div>
     </section>
