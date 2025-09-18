@@ -45,8 +45,8 @@ const ClientsCarousel = () => {
     return () => clearInterval(interval);
   }, [isHovered]);
 
-  // Duplicate clients for seamless loop - more duplicates for better mobile scrolling
-  const duplicatedClients = [...clients, ...clients, ...clients];
+  // Duplicate clients for seamless loop - many duplicates for mobile scrolling
+  const duplicatedClients = [...clients, ...clients, ...clients, ...clients, ...clients];
 
   return (
     <section className="py-3 sm:py-6 bg-gray-50">
@@ -75,26 +75,36 @@ const ClientsCarousel = () => {
         >
           <div 
             ref={carouselRef} 
-            className="flex gap-4 sm:gap-6 lg:gap-8 py-4 sm:py-6 mobile-scroll"
+            className="py-4 sm:py-6 hide-scrollbar"
             style={{ 
-              touchAction: 'pan-x',
-              whiteSpace: 'nowrap'
+              overflowX: 'auto',
+              overflowY: 'hidden',
+              WebkitOverflowScrolling: 'touch',
+              touchAction: 'pan-x'
             }}
           >
-            {duplicatedClients.map((client, index) => (
-              <div 
-                key={`${client.name}-${index}`} 
-                className="flex-shrink-0 flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 lg:h-16 lg:w-32 opacity-60 hover:opacity-100 transition-opacity duration-300"
-              >
-                <Image
-                  src={client.logo}
-                  alt={`${client.name} logo`}
-                  width={80}
-                  height={40}
-                  className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-            ))}
+            <div 
+              className="flex gap-4 sm:gap-6 lg:gap-8"
+              style={{ 
+                width: 'max-content',
+                minWidth: '100%'
+              }}
+            >
+              {duplicatedClients.map((client, index) => (
+                <div 
+                  key={`${client.name}-${index}`} 
+                  className="flex-shrink-0 flex items-center justify-center h-12 w-24 sm:h-16 sm:w-32 lg:h-16 lg:w-32 opacity-60 hover:opacity-100 transition-opacity duration-300"
+                >
+                  <Image
+                    src={client.logo}
+                    alt={`${client.name} logo`}
+                    width={80}
+                    height={40}
+                    className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           
           {/* Gradient overlays for smooth fade effect */}
