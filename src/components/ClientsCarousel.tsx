@@ -19,10 +19,17 @@ const clients = [
 const ClientsCarousel = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isManuallyScrolling, setIsManuallyScrolling] = useState(false);
 
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
+
+    // Check if it's mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    // Only auto-scroll on desktop
+    if (isMobile) return;
 
     const scrollStep = 0.5;
     const interval = setInterval(() => {
@@ -38,8 +45,8 @@ const ClientsCarousel = () => {
     return () => clearInterval(interval);
   }, [isHovered]);
 
-  // Duplicate clients for seamless loop
-  const duplicatedClients = [...clients, ...clients];
+  // Duplicate clients for seamless loop - more duplicates for better mobile scrolling
+  const duplicatedClients = [...clients, ...clients, ...clients];
 
   return (
     <section className="py-3 sm:py-6 bg-gray-50">
@@ -74,20 +81,27 @@ const ClientsCarousel = () => {
             ref={carouselRef} 
             className="flex gap-4 sm:gap-6 lg:gap-8 overflow-x-auto py-4 sm:py-6 no-scrollbar"
             style={{ 
-              scrollBehavior: 'smooth',
+              scrollBehavior: 'auto',
               WebkitOverflowScrolling: 'touch',
               overflowX: 'scroll',
               minWidth: '100%',
               touchAction: 'pan-x',
-              overscrollBehaviorX: 'contain'
+              overscrollBehaviorX: 'contain',
+              scrollSnapType: 'none'
             }}
             onTouchStart={(e) => {
-              // Ensure touch scrolling works on mobile
-              e.currentTarget.style.scrollBehavior = 'auto';
+              // Mark as manually scrolling
+              setIsManuallyScrolling(true);
+              e.stopPropagation();
+            }}
+            onTouchMove={(e) => {
+              // Allow touch scrolling
+              e.stopPropagation();
             }}
             onTouchEnd={(e) => {
-              // Re-enable smooth scrolling after touch
-              e.currentTarget.style.scrollBehavior = 'smooth';
+              // Reset manual scrolling after a delay
+              setTimeout(() => setIsManuallyScrolling(false), 1000);
+              e.stopPropagation();
             }}
           >
             {duplicatedClients.map((client, index) => (
