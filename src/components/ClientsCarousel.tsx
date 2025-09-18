@@ -19,17 +19,15 @@ const clients = [
 const ClientsCarousel = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isManuallyScrolling, setIsManuallyScrolling] = useState(false);
 
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    // Only auto-scroll on desktop (screen width > 768px)
-    if (window.innerWidth <= 768) return;
-
     const scrollStep = 0.5;
     const interval = setInterval(() => {
-      if (isHovered) return; // Pause on hover
+      if (isHovered || isManuallyScrolling) return; // Pause on hover or manual scrolling
       
       if (carousel.scrollLeft + carousel.offsetWidth >= carousel.scrollWidth) {
         carousel.scrollLeft = 0;
@@ -39,7 +37,7 @@ const ClientsCarousel = () => {
     }, 30);
 
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, isManuallyScrolling]);
 
   // Duplicate clients for seamless loop - many duplicates for mobile scrolling
   const duplicatedClients = [...clients, ...clients, ...clients, ...clients, ...clients];
@@ -77,6 +75,11 @@ const ClientsCarousel = () => {
               touchAction: 'pan-x',
               minWidth: '200vw'
             }}
+            onTouchStart={() => setIsManuallyScrolling(true)}
+            onTouchEnd={() => {
+              setTimeout(() => setIsManuallyScrolling(false), 2000);
+            }}
+            onScroll={() => setIsManuallyScrolling(true)}
           >
             {duplicatedClients.map((client, index) => (
               <div 
