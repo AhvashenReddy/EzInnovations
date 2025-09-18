@@ -50,7 +50,7 @@ const ClientsCarousel = () => {
 
   return (
     <section className="py-3 sm:py-6 bg-gray-50">
-      <div className="w-full px-2 sm:px-6 lg:px-8">
+      <div className="w-full px-2 sm:px-6 lg:px-8 overflow-hidden">
         <div className="text-center mb-3 sm:mb-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -72,36 +72,13 @@ const ClientsCarousel = () => {
           viewport={{ once: true }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          style={{ 
-            WebkitOverflowScrolling: 'touch',
-            touchAction: 'pan-x'
-          }}
         >
           <div 
             ref={carouselRef} 
-            className="flex gap-4 sm:gap-6 lg:gap-8 overflow-x-auto py-4 sm:py-6 no-scrollbar"
+            className="flex gap-4 sm:gap-6 lg:gap-8 py-4 sm:py-6 mobile-scroll"
             style={{ 
-              scrollBehavior: 'auto',
-              WebkitOverflowScrolling: 'touch',
-              overflowX: 'scroll',
-              minWidth: '100%',
               touchAction: 'pan-x',
-              overscrollBehaviorX: 'contain',
-              scrollSnapType: 'none'
-            }}
-            onTouchStart={(e) => {
-              // Mark as manually scrolling
-              setIsManuallyScrolling(true);
-              e.stopPropagation();
-            }}
-            onTouchMove={(e) => {
-              // Allow touch scrolling
-              e.stopPropagation();
-            }}
-            onTouchEnd={(e) => {
-              // Reset manual scrolling after a delay
-              setTimeout(() => setIsManuallyScrolling(false), 1000);
-              e.stopPropagation();
+              whiteSpace: 'nowrap'
             }}
           >
             {duplicatedClients.map((client, index) => (
