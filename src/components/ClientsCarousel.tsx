@@ -24,6 +24,10 @@ const ClientsCarousel = () => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
+    // Only enable auto-scroll on desktop, disable on mobile
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return;
+
     const scrollStep = 0.5;
     const interval = setInterval(() => {
       if (isHovered) return; // Pause on hover
@@ -65,15 +69,21 @@ const ClientsCarousel = () => {
           viewport={{ once: true }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          style={{ 
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-x'
+          }}
         >
           <div 
             ref={carouselRef} 
             className="flex gap-6 sm:gap-8 lg:gap-12 overflow-x-auto py-4 sm:py-6 no-scrollbar"
             style={{ 
-              scrollBehavior: 'smooth',
+              scrollBehavior: 'auto',
               WebkitOverflowScrolling: 'touch',
               overflowX: 'scroll',
-              minWidth: '100%'
+              minWidth: '100%',
+              touchAction: 'pan-x',
+              overscrollBehaviorX: 'contain'
             }}
           >
             {duplicatedClients.map((client, index) => (
