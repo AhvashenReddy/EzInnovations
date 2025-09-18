@@ -11,7 +11,7 @@ const clients = [
   { name: 'Duplex', logo: '/clients/duplex.png' },
   { name: 'Everwey Projects', logo: '/clients/EverweyProjects.png' },
   { name: 'Growthpoint', logo: '/clients/growthpoint.png' },
-  { name: 'Hello Yes', logo: '/clients/Helloyes.svg' },
+  { name: 'Hello Yes', logo: '/clients/HelloYes.png' },
   { name: 'Izisombululo', logo: '/clients/Izisombululo.png' },
   { name: 'Neo Next', logo: '/clients/NeoNext.png' },
 ];
