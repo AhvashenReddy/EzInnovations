@@ -68,19 +68,24 @@ const ClientsCarousel = () => {
         >
           <div 
             ref={carouselRef} 
-            className="flex gap-3 sm:gap-6 lg:gap-12 overflow-x-auto py-2 sm:py-4 no-scrollbar"
-            style={{ scrollBehavior: 'auto' }}
+            className="flex gap-6 sm:gap-8 lg:gap-12 overflow-x-auto py-4 sm:py-6 no-scrollbar"
+            style={{ 
+              scrollBehavior: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              scrollSnapType: 'x mandatory'
+            }}
           >
             {duplicatedClients.map((client, index) => (
               <div 
                 key={`${client.name}-${index}`} 
-                className="flex-shrink-0 flex items-center justify-center h-12 w-24 sm:h-14 sm:w-28 lg:h-16 lg:w-32 opacity-60 hover:opacity-100 transition-opacity duration-300"
+                className="flex-shrink-0 flex items-center justify-center h-16 w-32 sm:h-20 sm:w-40 lg:h-20 lg:w-40 opacity-60 hover:opacity-100 transition-opacity duration-300"
+                style={{ scrollSnapAlign: 'start' }}
               >
                 <Image 
                   src={client.logo} 
                   alt={`${client.name} logo`} 
-                  width={80} 
-                  height={40} 
+                  width={100} 
+                  height={50} 
                   className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300" 
                 />
               </div>
@@ -88,8 +93,8 @@ const ClientsCarousel = () => {
           </div>
           
           {/* Gradient overlays for smooth fade effect */}
-          <div className="absolute top-0 left-0 w-4 sm:w-8 lg:w-16 h-full bg-gradient-to-r from-gray-50 to-transparent pointer-events-none"></div>
-          <div className="absolute top-0 right-0 w-4 sm:w-8 lg:w-16 h-full bg-gradient-to-l from-gray-50 to-transparent pointer-events-none"></div>
+          <div className="absolute top-0 left-0 w-8 sm:w-12 lg:w-16 h-full bg-gradient-to-r from-gray-50 to-transparent pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-8 sm:w-12 lg:w-16 h-full bg-gradient-to-l from-gray-50 to-transparent pointer-events-none"></div>
         </motion.div>
       </div>
     </section>
