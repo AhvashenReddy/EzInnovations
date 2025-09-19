@@ -37,7 +37,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-teal-600 rounded-md flex items-center justify-center">
                 <span className="text-white font-bold text-sm">EZ</span>
               </div>
-              <span className="text-lg sm:text-xl font-bold">Ez Innovations</span>
+              <span className="text-lg sm:text-xl font-bold">Innovations</span>
             </Link>
             <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
               Leading South African software development company specializing in custom software solutions, 
