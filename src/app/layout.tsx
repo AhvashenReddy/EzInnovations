@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { RecaptchaProvider } from '@/contexts/RecaptchaContext'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -159,7 +160,9 @@ export default function RootLayout({
         <meta name="ICBM" content="-33.9249, 18.4241" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        {children}
+        <RecaptchaProvider>
+          {children}
+        </RecaptchaProvider>
       </body>
     </html>
   )

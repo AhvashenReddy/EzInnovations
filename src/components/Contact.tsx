@@ -2,12 +2,14 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react'
+import React, { useRef, useState, useEffect } from 'react'
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { useRecaptcha } from '@/contexts/RecaptchaContext'
 
 const Contact = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { recaptchaToken, executeRecaptcha, resetRecaptcha, recaptchaLoaded } = useRecaptcha()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,15 +17,61 @@ const Contact = () => {
     message: ''
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate form submission
-    setIsSubmitted(true)
-    setTimeout(() => {
-      setIsSubmitted(false)
+    setError('')
+    setIsSubmitting(true)
+
+    try {
+      // Execute reCAPTCHA if not already done
+      let token = recaptchaToken
+      if (!token) {
+        if (!recaptchaLoaded) {
+          setError('reCAPTCHA is still loading. Please wait a moment and try again.')
+          setIsSubmitting(false)
+          return
+        }
+        
+        token = await executeRecaptcha()
+        if (!token) {
+          setError('reCAPTCHA verification failed. Please try again.')
+          setIsSubmitting(false)
+          return
+        }
+      }
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          recaptchaToken: token,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      setIsSubmitted(true)
       setFormData({ name: '', email: '', company: '', message: '' })
-    }, 3000)
+      resetRecaptcha()
+      
+      setTimeout(() => {
+        setIsSubmitted(false)
+      }, 5000)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send message')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -32,6 +80,7 @@ const Contact = () => {
       [e.target.name]: e.target.value
     })
   }
+
 
   const contactInfo = [
     {
@@ -131,6 +180,17 @@ const Contact = () => {
           >
             <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">Send us a message</h3>
             
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md flex items-center space-x-2"
+              >
+                <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                <p className="text-sm text-red-700">{error}</p>
+              </motion.div>
+            )}
+            
             {isSubmitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -206,12 +266,28 @@ const Contact = () => {
                   />
                 </div>
 
+                {/* reCAPTCHA Notice */}
+                <div className="text-center">
+                  <p className="text-xs text-gray-500">
+                    This site is protected by reCAPTCHA and the Google{' '}
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:text-teal-700">
+                      Privacy Policy
+                    </a>{' '}
+                    and{' '}
+                    <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:text-teal-700">
+                      Terms of Service
+                    </a>{' '}
+                    apply.
+                  </p>
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full btn-primary group"
+                  disabled={isSubmitting || !recaptchaLoaded}
+                  className="w-full btn-primary group disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
-                  <Send className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {!isSubmitting && <Send className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />}
                 </button>
               </form>
             )}
