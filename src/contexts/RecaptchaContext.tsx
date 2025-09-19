@@ -4,7 +4,7 @@ import React, { createContext, useContext, useRef, useState, useEffect } from 'r
 import ReCAPTCHA from 'react-google-recaptcha'
 
 interface RecaptchaContextType {
-  recaptchaRef: React.RefObject<ReCAPTCHA>
+  recaptchaRef: React.RefObject<ReCAPTCHA | null>
   recaptchaToken: string | null
   setRecaptchaToken: (token: string | null) => void
   recaptchaLoaded: boolean
